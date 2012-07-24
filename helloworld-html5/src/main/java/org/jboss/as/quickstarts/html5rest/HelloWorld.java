@@ -45,6 +45,14 @@ public class HelloWorld {
     }
 
     @POST
+    @Path("/json/")
+    @Produces("application/json")
+    public String getHelloWorldJSON() {
+        System.out.println("name:");
+        return "{\"result\":\"" + helloService.createHelloMessage(null) + "\"}";
+    }
+    
+    @POST
     @Path("/xml/{name}")
     @Produces("application/xml")
     public String getHelloWorldXML(@PathParam("name") String name) {
