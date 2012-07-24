@@ -20,12 +20,29 @@
 <html>
 <head>
 <title>HTML5 + REST Hello World</title>
+<link rel="stylesheet" href="css/screen.css"/>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
 
 <script type="text/javascript"> 
 $(document).ready(function() {
 	$('#sayHello').click(function() {
+
+        if ($('#result').hasClass('success')) {
+        	$('#result').removeClass('success');
+        }
+
+        if ($('#result').hasClass('invalid')) {
+        	$('#result').removeClass('invalid');
+        }
+		
 		var name = $('#name').val();
+		
+        if ((name == null) || (name.length < 1)) {
+			$('#result').addClass('invalid');
+            $('#result').text('may not be empty');
+            return false;
+        }
+		
 		//console.log("clicked: " + name);
         var jqxhr = $.ajax('hello/json/' + name, {
             dataType:'json',
@@ -33,6 +50,7 @@ $(document).ready(function() {
             type:'POST',
             success:function (data) {
                 //console.log("success: " + data.result);
+                $('#result').addClass('success');
                 $('#result').text(data.result);
             }
         })
