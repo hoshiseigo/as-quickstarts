@@ -26,20 +26,21 @@
 <script type="text/javascript"> 
 $(document).ready(function() {
 	$('#sayHello').click(function() {
+        var result = $('#result');
 
-        if ($('#result').hasClass('success')) {
-        	$('#result').removeClass('success');
+        if (result.hasClass('success')) {
+        	result.removeClass('success');
         }
 
-        if ($('#result').hasClass('invalid')) {
-        	$('#result').removeClass('invalid');
+        if (result.hasClass('invalid')) {
+        	result.removeClass('invalid');
         }
 		
 		var name = $('#name').val();
 		
         if ((name == null) || (name.length < 1)) {
-            $('#result').addClass('invalid');
-            $('#result').text('may not be empty');
+            result.addClass('invalid');
+            result.text('may not be empty');
             return false;
         }
 		
@@ -50,8 +51,8 @@ $(document).ready(function() {
             type:'POST',
             success:function (data) {
                 //console.log("success: " + data.result);
-                $('#result').addClass('success');
-                $('#result').text(data.result);
+                result.addClass('success');
+                result.text(data.result);
             }
         })
 		.error(function() {
